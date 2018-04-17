@@ -24,7 +24,7 @@ def createmode():
      model = Sequential()
      ke_width = 3
      ke_height= 3
-     filter1 = 6
+     filter1 = 3
      model.add(Conv2D(filter1,ke_width,ke_height,kernel_initializer = keras.initializers.Constant(value=0.12),input_shape= girl.shape,name='conv_1'))
      model.add(MaxPooling2D(pool_size=(3,3)))
      model.add(Activation('relu'))
@@ -41,13 +41,13 @@ def createmode():
      model.add(Dense(8, activation='relu',name='dens_1'))
      model.save_weights('girl.h5')
      
-# only load the first layer's weights
+# only loading the first layer's weights
 createmode()
 
 model2 = Sequential()
 ke_width = 3
 ke_height= 3
-filter1 = 6
+filter1 = 3
 model2.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_1'))
 model2.add(MaxPooling2D(pool_size=(3,3)))
 model2.add(Activation('relu'))
