@@ -16,6 +16,7 @@ def visualize(img):
      img = img-(min_img)
      img=img/(max_img - min_img)
      img = img*255 
+     #attention: the feature maps may have different dimensions, only a image with 3 dimensions can be saved.
     # img = img.reshape(img.shape[:2])
      cv2.imwrite('layer1_noreshape_filter'+str(filter1)+'_'+str(ke_width)+'x'+str(ke_height)+'.jpg',img)
      
