@@ -26,10 +26,10 @@ ke_height= 3
 filter1 = 6
 model.add(Conv2D(filter1,ke_width,ke_height,kernel_initializer = keras.initializers.Constant(value=0.12),input_shape= girl.shape,name='conv_1'))
 model.add(MaxPooling2D(pool_size=(3,3)))
-model.add(Activation('tanh'))
+model.add(Activation('relu'))
 model.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_2'))
 model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Activation('tanh'))
+model.add(Activation('relu'))
 model.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_3'))
 #model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Activation('relu'))
@@ -39,11 +39,16 @@ model.add(Activation('relu'))
 model.add(Flatten())
 model.add(Dense(8, activation='relu',name='dens_1'))
 model.save_weights('girl.h5')
-#model.load_weights('girl.h5', by_name=True)
+# only load the first layer's weights
+model2 = Sequential()
+model2.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_1'))
+model2.add(MaxPooling2D(pool_size=(3,3)))
+model2.add(Activation('relu'))
+model2.load_weights('girl.h5', by_name=True)
 
 
 
 girl_batch = np.expand_dims(girl,axis=0)
-conv_girl = model.predict(girl_batch)
+conv_girl = model2.predict(girl_batch)
 visualize(conv_girl)
 
