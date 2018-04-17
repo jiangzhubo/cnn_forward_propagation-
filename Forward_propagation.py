@@ -20,26 +20,29 @@ def visualize(img):
      cv2.imwrite('layer1_noreshape_filter'+str(filter1)+'_'+str(ke_width)+'x'+str(ke_height)+'.jpg',img)
      
 girl = cv2.imread('girl.jpg')
-model = Sequential()
-ke_width = 3
-ke_height= 3
-filter1 = 6
-model.add(Conv2D(filter1,ke_width,ke_height,kernel_initializer = keras.initializers.Constant(value=0.12),input_shape= girl.shape,name='conv_1'))
-model.add(MaxPooling2D(pool_size=(3,3)))
-model.add(Activation('relu'))
-model.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_2'))
-model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Activation('relu'))
-model.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_3'))
-#model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Activation('relu'))
-model.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_4'))
-#model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Activation('relu'))
-model.add(Flatten())
-model.add(Dense(8, activation='relu',name='dens_1'))
-model.save_weights('girl.h5')
+def createmode():
+     model = Sequential()
+     ke_width = 3
+     ke_height= 3
+     filter1 = 6
+     model.add(Conv2D(filter1,ke_width,ke_height,kernel_initializer = keras.initializers.Constant(value=0.12),input_shape= girl.shape,name='conv_1'))
+     model.add(MaxPooling2D(pool_size=(3,3)))
+     model.add(Activation('relu'))
+     model.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_2'))
+     model.add(MaxPooling2D(pool_size=(2,2)))
+     model.add(Activation('relu'))
+     model.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_3'))
+     #model.add(MaxPooling2D(pool_size=(2,2)))
+     model.add(Activation('relu'))
+     model.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_4'))
+     #model.add(MaxPooling2D(pool_size=(2,2)))
+     model.add(Activation('relu'))
+     model.add(Flatten())
+     model.add(Dense(8, activation='relu',name='dens_1'))
+     model.save_weights('girl.h5')
+     
 # only load the first layer's weights
+createmode()
 model2 = Sequential()
 model2.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_1'))
 model2.add(MaxPooling2D(pool_size=(3,3)))
