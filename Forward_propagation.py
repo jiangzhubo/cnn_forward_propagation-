@@ -43,7 +43,11 @@ def createmode():
      
 # only load the first layer's weights
 createmode()
+
 model2 = Sequential()
+ke_width = 3
+ke_height= 3
+filter1 = 6
 model2.add(Conv2D(filter1,ke_width,ke_height,input_shape= girl.shape,name='conv_1'))
 model2.add(MaxPooling2D(pool_size=(3,3)))
 model2.add(Activation('relu'))
